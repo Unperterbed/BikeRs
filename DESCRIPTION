@@ -1,0 +1,15 @@
+Package: BikeRs
+Type: Package
+Title: A suite of functions for Dr. Bikos' Research Vertical Team
+Version: 0.1.0
+Author: Kirby White, MA
+Maintainer: Kirby White <whitek5@spu.edu>
+Description: The BikeRs package provides a set of analytics tools to use with the relevant datasets.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr (>= 0.8.4),
+    tidyr (>= 1.0.2),
+    tidyselect (>= 1.0.0)
+RoxygenNote: 7.0.2
