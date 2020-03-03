@@ -4,7 +4,7 @@
 #' @param RawDataSet Required DataFrame or Matrix. The R object containing desired items.
 #' @param longformat Optional Boolean (defaults FALSE) indicating whether to return the CVQ items in a wide of long format.
 #' @param condensed Optional Boolean (defaults TRUE). Indicates whether the scale and item should be combined (e.g., "CVQ18") or in seperate columns (e.g., "CVQ" and "18"). Note that this ONLY applies when longformat = TRUE.
-#' @param cutoff Optional Numerical, 0 - 1 (defaults 0.8) Indicates the percentage of required responses be a "qualified" case. For instance, if cutoff = 0.8 then they must have answered at >=80% of the possible items. Enter "0" to include all entries.
+#' @param cutoff Optional Numerical, 0 - 1 (defaults 0.8) Indicates the percentage of required responses be a "qualified" case. For instance, if cutoff = 0.8 then they must have answered at >=80 percent of the possible items. Enter "0" to include all entries.
 #' @param reportmissing Optional Boolean (defaults TRUE). Indicates whether to include "nMissing" and "pMissing" columns to indicate the number and percentage of items missing, respectively.
 #' @param reverse Optional Boolean (defaults TRUE). Indicates whether to reverse score the CVQ-8 item or not.
 #' @param new_id Optional Boolean (defaults FALSE). Indicates whether to combine year and ID into a new ID formatted as Year_ID.
@@ -12,7 +12,6 @@
 #' @keywords CVQ
 #' @export
 #' @examples getCVQ()
-#' getCVQ()
 
 #NOTE: Want to add these features:
 # 'report' to print metrics pre/post cleaning

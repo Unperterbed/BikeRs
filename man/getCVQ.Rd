@@ -22,7 +22,7 @@ getCVQ(
 
 \item{condensed}{Optional Boolean (defaults TRUE). Indicates whether the scale and item should be combined (e.g., "CVQ18") or in seperate columns (e.g., "CVQ" and "18"). Note that this ONLY applies when longformat = TRUE.}
 
-\item{cutoff}{Optional Numerical, 0 - 1 (defaults 0.8) Indicates the percentage of required responses be a "qualified" case. For instance, if cutoff = 0.8 then they must have answered at >=80% of the possible items. Enter "0" to include all entries.}
+\item{cutoff}{Optional Numerical, 0 - 1 (defaults 0.8) Indicates the percentage of required responses be a "qualified" case. For instance, if cutoff = 0.8 then they must have answered at >=80 percent of the possible items. Enter "0" to include all entries.}
 
 \item{reportmissing}{Optional Boolean (defaults TRUE). Indicates whether to include "nMissing" and "pMissing" columns to indicate the number and percentage of items missing, respectively.}
 
@@ -36,7 +36,6 @@ getCVQ(
 This function returns a dataframe with the CVQ scores for each participant. Users can
 }
 \examples{
-getCVQ()
 getCVQ()
 }
 \keyword{CVQ}
