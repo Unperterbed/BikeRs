@@ -10,6 +10,7 @@
 #' @param drop_id Optional Boolean (defaults FALSE). Indicates whether to drop the original ID column.Note that this ONLY applies when new_id = TRUE.
 #' @param reverse Optional Boolean (defaults TRUE). Indicates whether to reverse score the CVQ-8 item or not.
 #' @param subscales Optional numeric (defaults '0'). Indicates the subscales to calculate. Valid options are 0, 2, 6, or 8. The 8-factor option simply returns both the 2- and 6-factor scales. The 0 option doesn't return any subscales. Be aware that item 8 MUST be reverse scored to calculate correctly; you may use "Reverse = TRUE" to do it here, or leave "Reverse = FALSE" if you did it before importing the data. See Dik et al (2012) for details on scoring.
+#' @param items Optional Boolean (defaults TRUE). When subscales is not set to 0, set items to FALSE to exclude the individual CVQ items. This will return only the subscale scores.
 #' @keywords CVQ
 #' @export
 #' @examples getCVQ()
@@ -30,20 +31,22 @@ getCVQ <- function(RawDataSet,
                    new_id = FALSE,
                    drop_id = FALSE,
                    reverse = TRUE,
-                   subscales = 0){
+                   subscales = 0,
+                   items = TRUE){
 
   #Argument validation
   stopifnot(missing(RawDataSet)==FALSE)
   stopifnot(class(RawDataSet)=="data.frame" | class(RawDataSet)=="matrix")
   stopifnot(cutoff >= 0 & cutoff <=1)
   stopifnot(subscales == 0 | subscales == 2 | subscales == 6 | subscales == 8)
+  stopifnot(items == TRUE | items == FALSE)
 
 
   #Requires dplyr and tidyverse to be installed and activated. If either are missing, it installs tidyverse but activates tidyr and dplyr
   if(!(require("tidyr") | require("dplyr") | require("tidyselect"))){
     sp <- suppressPackageStartupMessages()
     suppressPackageStartupMessages(TRUE)
-    print("Some required packages are missing. Please wait.")
+    warning("getCVQ Note: Some required packages are missing. Please wait.")
 
     #Installs tidyr, if needed
     if(!require("tidyr")){
@@ -63,7 +66,7 @@ getCVQ <- function(RawDataSet,
     if(!(require("tidyr") | require("dplyr")| require("tidyselect"))){
       stop("Some packages could not be loaded. Please install tidyr and dplyr before continuing.")
     }else{
-      print("getCVQ NOTE: Required packages have been installed and attached.")
+      warning("getCVQ NOTE: Required packages have been installed and attached.")
     }
   }
 
@@ -112,7 +115,7 @@ getCVQ <- function(RawDataSet,
 
   #Calculates subscale scores, if requested
   if(subscales != 0){
-    print("NOTE: The subscales assume that CVQ8 has been reverse scored. If needed, you can include the argument Reverse = TRUE.")
+    warning("getCVQ Note: The subscales assume that CVQ8 has been reverse scored. If needed, you can include the argument Reverse = TRUE.")
 
     #Creates all 8 scales
 
@@ -157,7 +160,18 @@ getCVQ <- function(RawDataSet,
                   CVQ_Presence))
       }
 
+  }
+
+  #Drops CVQ items, if requested
+  if(items == FALSE){
+    if(subscales == 0){
+      warning("getCVQ Note: items == FALSE only works when subscales is set to 2, 6, or 8.")
+    }else{
+      tempDF <- tempDF %>%
+        select(- matches("^CVQ\\d")) #Drops any column that starts with "CVQ" followed by any digit
     }
+  }
+
 
   #Converts to long format, if requested
   if (longformat == TRUE){
@@ -174,7 +188,7 @@ getCVQ <- function(RawDataSet,
     }
   }else{
     if(condensed == FALSE){
-      print("getCVQ NOTE: condensed = FALSE only works while longformat = TRUE")
+      warning("getCVQ NOTE: condensed = FALSE only works while longformat = TRUE")
     }
   }
 
@@ -190,7 +204,7 @@ getCVQ <- function(RawDataSet,
     }
   }else{
     if(drop_id == TRUE){
-    print("getCVQ NOTE: drop_id = TRUE only works while new_id = TRUE")
+    warning("getCVQ NOTE: drop_id = TRUE only works while new_id = TRUE")
     }
   }
 

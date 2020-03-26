@@ -13,7 +13,8 @@ getCVQ(
   new_id = FALSE,
   drop_id = FALSE,
   reverse = TRUE,
-  subscales = 0
+  subscales = 0,
+  items = TRUE
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ getCVQ(
 \item{reverse}{Optional Boolean (defaults TRUE). Indicates whether to reverse score the CVQ-8 item or not.}
 
 \item{subscales}{Optional numeric (defaults '0'). Indicates the subscales to calculate. Valid options are 0, 2, 6, or 8. The 8-factor option simply returns both the 2- and 6-factor scales. The 0 option doesn't return any subscales. Be aware that item 8 MUST be reverse scored to calculate correctly; you may use "Reverse = TRUE" to do it here, or leave "Reverse = FALSE" if you did it before importing the data. See Dik et al (2012) for details on scoring.}
+
+\item{items}{Optional Boolean (defaults TRUE). When subscales is not set to 0, set items to FALSE to exclude the individual CVQ items. This will return only the subscale scores.}
 }
 \description{
 This function returns a dataframe with the CVQ scores for each participant. Users can
