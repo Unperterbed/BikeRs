@@ -1,8 +1,8 @@
 Package: BikeRs
 Type: Package
 Title: A suite of functions for Dr. Bikos' Research Vertical Team
-Version: 0.1.0
-Date: 2020-03-03
+Version: 0.1.1
+Date: 2020-03-25
 Author: Kirby White, MA
 Maintainer: Kirby White <whitek5@spu.edu>
 Description: The BikeRs package provides a set of analytics tools to use with the relevant datasets.
